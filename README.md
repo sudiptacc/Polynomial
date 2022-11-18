@@ -22,7 +22,7 @@
   * Negation of a polynomial
   * Check for equality between polynomials
 
-# Methods
+# User Methods
  ### MathUtil
   * isClose
  ### Term
@@ -39,7 +39,7 @@
   * multiply
   * equals
 
-# Polynomial
+### Polynomial
  * getDegree
  * getLeadingCoeff
  * getLeadingTerm
