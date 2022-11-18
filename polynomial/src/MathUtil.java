@@ -1,6 +1,4 @@
-package polynomial;
-
-import java.util.ArrayList;
+package polynomial.src;
 
 /* This class is only for class/static methods for math formulas and other utilities */
 public class MathUtil {
@@ -16,18 +14,5 @@ public class MathUtil {
      */
     public static boolean isClose(double value, double reference, double tolerance) {
         return Math.abs(value - reference) < tolerance;
-    }
-
-    /**
-     * This method is to condense the code to add two ArrayLists together into a single method.
-     * @param firstTerms the first ArrayList of Monomials
-     * @param secondTerms the second ArrayList of Monomials
-     * @return the ArrayList of the addition of the two other ArrayLists
-     */
-    public static ArrayList<Term> sumOfTermLists(ArrayList<Term> firstTerms, ArrayList<Term> secondTerms) {
-        ArrayList<Term> combinedTerms = new ArrayList<Term>();
-        combinedTerms.addAll(firstTerms);
-        combinedTerms.addAll(secondTerms);
-        return combinedTerms;
     }
 }

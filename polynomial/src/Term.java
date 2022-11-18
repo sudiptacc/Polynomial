@@ -1,4 +1,4 @@
-package polynomial;
+package polynomial.src;
 
 public class Term {
     /**

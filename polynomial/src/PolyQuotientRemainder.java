@@ -1,4 +1,4 @@
-package polynomial;
+package polynomial.src;
 
 public class PolyQuotientRemainder {
     /* Simple key-value pair class to represent polynomial division quotient and remainder */

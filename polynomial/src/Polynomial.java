@@ -1,4 +1,5 @@
-package polynomial;
+package polynomial.src;
+
 import java.util.ArrayList;
 
 public class Polynomial {
@@ -97,6 +98,13 @@ public class Polynomial {
         terms.sort(new SortByDegree());
     }
 
+    private ArrayList<Term> sumOfTermLists(ArrayList<Term> firstTerms, ArrayList<Term> secondTerms) {
+        ArrayList<Term> combinedTerms = new ArrayList<Term>();
+        combinedTerms.addAll(firstTerms);
+        combinedTerms.addAll(secondTerms);
+        return combinedTerms;
+    }
+
     /* Removes any terms that have a coefficient of 0. Those terms don't contribute anything meaningful */
     private void removeDuplicateZeroTerms() {
         ArrayList<Term> redundantTerms = new ArrayList<Term>();
@@ -182,22 +190,22 @@ public class Polynomial {
      * Produces the sum of two Polynomials.
      * @param addend the Polynomial that is being added
      * @return the sum of the Polynomials
-     * @see MathUtil.sumOfTermLists 
+     * @see sumOfTermLists 
      * @see combineLikeTerms
      */
     public Polynomial add(Polynomial addend) {        
-        return new Polynomial(MathUtil.sumOfTermLists( terms, addend.terms() ));
+        return new Polynomial(sumOfTermLists( terms, addend.terms() ));
     }
 
     /** 
      * Produces the difference of two Polynomials
      * @param subtrahend the Polynomial that is the subtrahend
      * @return the difference of the Polynomials
-     * @see MathUtil.sumOfTermLists 
+     * @see sumOfTermLists 
      * @see combineLikeTerms
      */
     public Polynomial subtract(Polynomial subtrahend) {
-        return new Polynomial(MathUtil.sumOfTermLists(terms, subtrahend.negation().terms()));
+        return new Polynomial(sumOfTermLists(terms, subtrahend.negation().terms()));
     }
 
     /** 
