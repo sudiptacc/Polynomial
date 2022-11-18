@@ -62,6 +62,5 @@
 
 # To Be Implemented
  ### Polynomial
-  * Raising polynomials to a power
   * Polynomial inequalities
   * Finding real roots of polynomials
