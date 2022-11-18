@@ -37,6 +37,7 @@
   * add
   * subtract
   * multiply
+  * pow
   * equals
 
 ### Polynomial
@@ -55,6 +56,7 @@
  * add
  * subtract
  * multiply
+ * pow
  * divide
  * equals
 

@@ -269,8 +269,17 @@ public class Polynomial {
         else return false;
     }
 
-
-    // public ??? realRoots() {
-    //     return ???;
-    // }
+    /**
+     * Produces the result of the polynomial raised to a power
+     * @param power by what the degree the polynomial is raised 
+     * @return a polynomial that is this polynomial raised to the power
+     */
+    public Polynomial pow(int power) {
+        /* Currently, this method is run iteratively. This is really slow for higher powers, but I suppose there isn't anyway to circumnavigate that */
+        Polynomial result = clone();
+        for (int i = 1; i < power; i++) {
+            result = result.multiply(this);
+        }
+        return result;
+    }
 }

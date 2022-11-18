@@ -107,6 +107,15 @@ public class Term {
     }
 
     /**
+     * Produces the result of the term raised to a power
+     * @param power by what degree the term is raised
+     * @return a term that is this term raised to the power
+     */
+    public Term pow(int power) {
+        return new Term(Math.pow(coefficient, power), degree * power);
+    }
+
+    /**
      * I decided to not include division here, because the output of the division between
      * two terms is not always a term. This would mess with the definition of the
      * term class, so I decided that the division should be left for the Polynomial class.
