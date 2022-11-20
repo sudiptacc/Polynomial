@@ -127,7 +127,7 @@ public class Term {
      * @return  whether or not the two terms are equal
      */
     public boolean equals(Term term) {
-        return MathUtil.isClose(coefficient, term.getCoefficient()) && 
+        return MathUtil.isClose(coefficient, term.getCoefficient(), MathUtil.EPSILON) && 
                degree == term.getDegree();
     }
 
