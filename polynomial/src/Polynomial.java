@@ -295,7 +295,9 @@ public class Polynomial {
         ArrayList<Double> roots = new ArrayList<Double>();
 
         /* The root of a linear function ax+b is given by the formula -b/a */
-        if (degree == 1) roots.add(-terms.get(1).getCoefficient() / terms.get(0).getCoefficient());
+        if (degree == 1) {
+            roots.add(-terms.get(1).getCoefficient() / terms.get(0).getCoefficient());
+        }
         else {
             /* For now, an initial guess of 0 will be taken. If the derivative at the guess is 0, then guess again */
             double guess = 0;
@@ -310,8 +312,10 @@ public class Polynomial {
                 x = x - valueAt(x) / derivative().valueAt(x);
 
                 /* If the value of the function at x is sufficiently close to 0, we can stop interating */
-                if (MathUtil.isClose(valueAt(x), 0)) break;
+                if (MathUtil.isClose(valueAt(x), 0, MathUtil.EPSILON)) break;
             }
+            /* Some values may be extremely close to the root (i.e. 2.99999999...), so they'll just be rounded off */
+            if (MathUtil.isClose(x, MathUtil.roundToInt(x), MathUtil.ROUNDING_THRESHOLD)) x = MathUtil.roundToInt(x);
             roots.add(x);
 
             /** According to the factor theorem, the roots of a polynomial are also the factor when expressed as a linear factor
