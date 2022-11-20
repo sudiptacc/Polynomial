@@ -1,6 +1,7 @@
 package polynomial.src;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Polynomial {
 
@@ -10,8 +11,8 @@ public class Polynomial {
     private double leadingCoeff;
     private Term leadingTerm;
 
+    /* n-ary amount of terms for a Polynomial */
     public Polynomial(Term ... polyTerms) {
-        /* Initialize the terms arraylist with the arguments */
         if (polyTerms.length >= 1) {
             for (Term term : polyTerms) {
                 terms.add(term);
@@ -23,8 +24,8 @@ public class Polynomial {
         updatePolynomial();
     }
 
+    /* Similar to the first constructor, but takes in an ArrayList instead */
     public Polynomial(ArrayList<Term> polyTerms) {
-        /* Initialize the terms arraylist with the arguments */
         if (polyTerms.size() >= 1) {
             for (Term term : polyTerms) {
                 terms.add(term);
@@ -162,7 +163,7 @@ public class Polynomial {
     }
     
     /**
-     * Produces the general derivative of the Polynomial
+     * Produces the general derivative of the Polynomial.
      * @return the Polynomial that is the general derivative of the Polynomial
      * @see Term.derivative
      */
@@ -175,7 +176,7 @@ public class Polynomial {
     }
 
     /** 
-     * Produces the negation of the Polynomial (all the terms are just negated)
+     * Produces the negation of the Polynomial (all the terms are just negated).
      * @return a Polynomial that represents the negation of this Polynomial
      */
     public Polynomial negation() {
@@ -198,7 +199,7 @@ public class Polynomial {
     }
 
     /** 
-     * Produces the difference of two Polynomials
+     * Produces the difference of two Polynomials.
      * @param subtrahend the Polynomial that is the subtrahend
      * @return the difference of the Polynomials
      * @see sumOfTermLists 
@@ -209,7 +210,7 @@ public class Polynomial {
     }
 
     /** 
-     * Produces the product of two Polynomials
+     * Produces the product of two Polynomials.
      * @param multiplicand the other factor
      * @return the product of the two Polynomials
      */
@@ -227,7 +228,7 @@ public class Polynomial {
     }
 
     /** 
-     * Produces the quotient and remainder of the division of two Polynomials
+     * Produces the quotient and remainder of the division of two Polynomials.
      * @param divisor the Polynomial that this is being divided by
      * @return PolyQuotientRemainder a key-value pair type object. This object has the methods getQuotient() and getRemainder()
      * to access the respective parts. The quotient and the remainder are also Polynomials
@@ -252,7 +253,7 @@ public class Polynomial {
     }
 
     /** 
-     * Produces the result of the assertion that this Polynomial is equal to the other Polynomial
+     * Produces the result of the assertion that this Polynomial is equal to the other Polynomial.
      * @param otherPolynomial the Polynomial that this Polynomial is being compared to
      * @return whether or not the two Polynomials are equal
      * @see Term.equals
@@ -270,7 +271,7 @@ public class Polynomial {
     }
 
     /**
-     * Produces the result of the polynomial raised to a power
+     * Produces the result of the polynomial raised to a power.
      * @param power by what the degree the polynomial is raised 
      * @return a polynomial that is this polynomial raised to the power
      */
@@ -281,5 +282,49 @@ public class Polynomial {
             result = result.multiply(this);
         }
         return result;
+    }
+
+    /**
+     * Produces a list of doubles containing approximations of the real roots of the polynomial.
+     * This method uses Newton's Method to approximate the real roots, and does so recursively.
+     * This function's time complexity is based on A. the degree of the polynomial and B. how far
+     * the roots are from 0. 
+     * @return a list of the real roots of the polynomial
+     */
+    public ArrayList<Double> realRoots() {
+        ArrayList<Double> roots = new ArrayList<Double>();
+
+        /* The root of a linear function ax+b is given by the formula -b/a */
+        if (degree == 1) roots.add(-terms.get(1).getCoefficient() / terms.get(0).getCoefficient());
+        else {
+            /* For now, an initial guess of 0 will be taken. If the derivative at the guess is 0, then guess again */
+            double guess = 0;
+
+            /** The reason we don't use a guess at which the derivative is zero is because f'(x) is a denominator 
+             * when finding the next x value. So, we choose a different value to prevent a divison by zero error */
+            while (derivative().valueAt(guess) == 0) guess++;
+            double x = guess;
+
+            /* The core of Newton's method; we find an x value closer to the root using the previous x value */
+            for (int i = 0; i < MathUtil.MAX_ITER; i++) {
+                x = x - valueAt(x) / derivative().valueAt(x);
+
+                /* If the value of the function at x is sufficiently close to 0, we can stop interating */
+                if (MathUtil.isClose(valueAt(x), 0)) break;
+            }
+            roots.add(x);
+
+            /** According to the factor theorem, the roots of a polynomial are also the factor when expressed as a linear factor
+             * such that a root r of p(x) means that (x-r) is a factor of p(x) */
+            Polynomial rootAsLinearFactor = new Polynomial(new Term(1, 1), new Term(-x, 0));
+
+            /** We will recursively find the roots of the polynomial divided by the linear factor we found. We keep doing this until
+             * the resulting polynomial has a degree of 1. A first degree polynomial is the base case, allowing us to find the root
+             * by formula. The division allows us to exclude the root we just found, so there are no duplicates. */
+            roots.addAll(this.divide(rootAsLinearFactor).getQuotient().realRoots());
+        }
+        /* If the function is a linear function, then nothing else is executed and an empty list is returned */
+        Collections.sort(roots);
+        return roots;
     }
 }

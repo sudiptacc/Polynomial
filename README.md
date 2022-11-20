@@ -21,10 +21,12 @@
   * General derivative of a polynomial
   * Negation of a polynomial
   * Check for equality between polynomials
+  * Find real roots (Using Newton's Method)
 
 # User Methods
  ### MathUtil
   * isClose
+  * roundToInt
  ### Term
   * getDegree
   * getCoefficient
@@ -59,8 +61,8 @@
  * pow
  * divide
  * equals
+ * realRoots
 
 # To Be Implemented
  ### Polynomial
   * Polynomial inequalities
-  * Finding real roots of polynomials

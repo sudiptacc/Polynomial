@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 final class SortByDegree implements Comparator<Term> {
 
-    /* 
+    /** 
      * Java needs a "comparator" class, so that a list can be sorted by a specific field of the objects.
      * In this case, we are checking by the degrees of the terms, so that the polynomial can be sorted to
      * standard form.

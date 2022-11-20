@@ -1,11 +1,7 @@
 package polynomial.src;
 
 public class Term {
-    /**
-     * This class has largely been tested for all of its methods and possible values,
-     * so there is no UserOfTerm class.
-     */
-
+    
     private int degree;
     private double coefficient;
 
@@ -51,7 +47,7 @@ public class Term {
     }
 
     /**
-     * Produces the general derivative of the term
+     * Produces the general derivative of the term.
      * @return the term that is the general derivative of the term
      */
     public Term derivative() {
@@ -60,7 +56,7 @@ public class Term {
     }
 
     /**
-     * Produces the negation of the term
+     * Produces the negation of the term.
      * @return the term that is the negation of the term
      */
     public Term negation() {
@@ -107,7 +103,7 @@ public class Term {
     }
 
     /**
-     * Produces the result of the term raised to a power
+     * Produces the result of the term raised to a power.
      * @param power by what degree the term is raised
      * @return a term that is this term raised to the power
      */
@@ -131,7 +127,7 @@ public class Term {
      * @return  whether or not the two terms are equal
      */
     public boolean equals(Term term) {
-        return MathUtil.isClose(coefficient, term.getCoefficient(), MathUtil.EPSILON) && 
+        return MathUtil.isClose(coefficient, term.getCoefficient()) && 
                degree == term.getDegree();
     }
 
