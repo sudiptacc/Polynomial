@@ -3,15 +3,20 @@ package polynomial.src;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * A Java based object model of polynomials and their properties. This class
+ * builds upon the Term class, in which a Term is described as a component of
+ * Polynomial. A polynomial can be constructed using term(s), an ArrayList of
+ * term(s), or the real roots and leading coefficient of the polynomial.
+ */
 public class Polynomial {
-
 
     private ArrayList<Term> terms = new ArrayList<Term>();
     private int degree;
     private double leadingCoeff;
     private Term leadingTerm;
 
-    /* n-ary amount of terms for a Polynomial */
+    /** The construction of a polynomial as a combination of Terms */
     public Polynomial(Term ... polyTerms) {
         if (polyTerms.length >= 1) {
             for (Term term : polyTerms) {
@@ -24,7 +29,7 @@ public class Polynomial {
         updatePolynomial();
     }
 
-    /* Similar to the first constructor, but takes in an ArrayList instead */
+    /** The construction of a polynomial using an array of Terms */
     public Polynomial(ArrayList<Term> polyTerms) {
         if (polyTerms.size() >= 1) {
             for (Term term : polyTerms) {
@@ -36,6 +41,8 @@ public class Polynomial {
         }
         updatePolynomial();
     }
+
+    /* TODO: Implement polynomial construction via leading coefficient and real roots */
 
     public int getDegree() {
         return degree;
@@ -308,14 +315,14 @@ public class Polynomial {
             double x = guess;
 
             /* The core of Newton's method; we find an x value closer to the root using the previous x value */
-            for (int i = 0; i < MathUtil.MAX_ITER; i++) {
+            for (int i = 0; i < MathConstants.MAX_ITER; i++) {
                 x = x - valueAt(x) / derivative().valueAt(x);
 
                 /* If the value of the function at x is sufficiently close to 0, we can stop interating */
-                if (MathUtil.isClose(valueAt(x), 0, MathUtil.EPSILON)) break;
+                if (MathUtil.isClose(valueAt(x), 0, MathConstants.EPSILON)) break;
             }
             /* Some values may be extremely close to the root (i.e. 2.99999999...), so they'll just be rounded off */
-            if (MathUtil.isClose(x, MathUtil.roundToInt(x), MathUtil.ROUNDING_THRESHOLD)) x = MathUtil.roundToInt(x);
+            if (MathUtil.isClose(x, MathUtil.roundToInt(x), MathConstants.ROUNDING_THRESHOLD)) x = MathUtil.roundToInt(x);
             roots.add(x);
 
             /** According to the factor theorem, the roots of a polynomial are also the factor when expressed as a linear factor
@@ -331,4 +338,5 @@ public class Polynomial {
         Collections.sort(roots);
         return roots;
     }
+
 }

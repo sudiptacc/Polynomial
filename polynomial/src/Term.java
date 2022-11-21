@@ -1,5 +1,12 @@
 package polynomial.src;
 
+/**
+ * The modelling of the component of a Polynomial. A Term is defined as a part
+ * of a Polynomial, such that the Polynomial is the sum of Terms. A term is
+ * represented by its coefficient and degree, where the coefficient is a real
+ * number and the degree is a whole number. Terms and Polynomials share many
+ * operations, but not necessarily all of them.
+ */
 public class Term {
     
     private int degree;
@@ -127,7 +134,7 @@ public class Term {
      * @return  whether or not the two terms are equal
      */
     public boolean equals(Term term) {
-        return MathUtil.isClose(coefficient, term.getCoefficient(), MathUtil.EPSILON) && 
+        return MathUtil.isClose(coefficient, term.getCoefficient(), MathConstants.EPSILON) && 
                degree == term.getDegree();
     }
 

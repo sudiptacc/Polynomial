@@ -1,7 +1,9 @@
 package polynomial.src;
 
+/**
+ * Simple key-value pair class to represent polynomial division quotient and remainder 
+ */
 public class PolyQuotientRemainder {
-    /* Simple key-value pair class to represent polynomial division quotient and remainder */
 
     private Polynomial quotient;
     private Polynomial remainder;

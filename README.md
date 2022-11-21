@@ -1,9 +1,6 @@
 # Polynomial
  An OOP representation of polynomials, using Java.
 
-### Note
- This was copied from my nft-server folder! Previous changes and additions aren't shown here.
-
 # Capabilities
  ### MathUtil
   * Float equality (closeness) using tolerance
@@ -66,3 +63,4 @@
 # To Be Implemented
  ### Polynomial
   * Polynomial inequalities
+  * Intervals for inequalities
