@@ -42,7 +42,16 @@ public class Polynomial {
         updatePolynomial();
     }
 
-    /* TODO: Implement polynomial construction via leading coefficient and real roots */
+    public Polynomial(double coefficient, double... roots) {
+        /** Initialize the output with the coefficient as the first factor */
+        Polynomial output = new Polynomial(new Term(coefficient, 0));
+        for (double root : roots) {
+            /** For each root, multiply the polynomial by the factor form of the root */
+            output = output.multiply(new Polynomial(new Term(1, 1), new Term(-root, 0)));
+        }
+        terms = output.terms();
+        updatePolynomial();
+    }
 
     public int getDegree() {
         return degree;
